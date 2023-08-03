@@ -5,7 +5,6 @@ import Popover from "react-bootstrap/Popover";
 
 export default function SummaryForm({ setOrderPhase }) {
   const [isChecked, setIsChecked] = useState(false);
-  const isDisabled = isChecked ? false : true;
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -41,7 +40,7 @@ export default function SummaryForm({ setOrderPhase }) {
             label={checkboxLabel}
           />
         </Form.Group>
-        <Button variant="primary" type="submit" disabled={isDisabled}>
+        <Button variant="primary" type="submit" disabled={!isChecked}>
           confirm order
         </Button>
       </Form>

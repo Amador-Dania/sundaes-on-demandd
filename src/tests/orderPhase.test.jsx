@@ -72,6 +72,7 @@ test("Order phases for happy path", async () => {
   const thankYouHeader = await screen.findByRole("heading", {
     name: /thank you/i,
   });
+
   expect(thankYouHeader).toBeInTheDocument();
 
   // expect that loading has disappeared
@@ -93,4 +94,28 @@ test("Order phases for happy path", async () => {
 
   // explicitly unmount component to trigger network call cancellation on cleanup
   unmount();
+});
+
+test("Quiz: Optional toppings on the summary page", async () => {
+  const user = userEvent.setup();
+  render(<App />);
+  const vanillaInput = await screen.findByRole("spinbutton", {
+    name: "Vanilla",
+  });
+  await user.clear(vanillaInput);
+  await user.type(vanillaInput, "1");
+
+  //find and click order summary button
+  const orderSummaryButton = screen.getByRole("button", {
+    name: /order sundae/i,
+  });
+  await user.click(orderSummaryButton);
+
+  //check summary subtotals
+
+  const scoopsHeading = screen.getByRole("heading", { name: "Scoops: $2.00" });
+  expect(scoopsHeading).toBeInTheDocument();
+
+  const toppingsHeading = screen.queryByRole("heading", { name: /toppings/i });
+  expect(toppingsHeading).not.toBeInTheDocument();
 });

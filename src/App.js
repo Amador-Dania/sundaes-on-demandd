@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 
-import OrderConfirmation from "./pages/confirmation/OrderConfirmation";
+import OrderConfirmation from "./pages/Confirmation/OrderConfirmation";
 import OrderEntry from "./pages/entry/OrderEntry";
 import OrderSummary from "./pages/summary/OrderSummary";
 
